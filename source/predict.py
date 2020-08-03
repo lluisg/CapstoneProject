@@ -68,22 +68,14 @@ def predict_fn(input_data, dictionary, model):
     # TODO: Process input_data so that it is ready to be sent to our model.
     #       You should produce two variables:
     #         data_X   - A sequence of length 34 which represents the converted word
-    #         data_len - The real length of the word
-    
-    if isinstance(data_input[0], str):
-        print('Is an string sentence input')
-        original_s_int, jumbled_s_int = prepare_predict(s, dictionary)
-    else:
-        print('Is an integer sentence input')
-        jumbled_s_int = data_input.copy()    
-    
+    #         data_len - The real length of the word        
     integer_sentence = [] 
-    for word in jumbled_s_int:
+    for word in data_input:
 #         print('word: ', word)
         word_batch = [word]
 
         if len(word) > 3:
-            dict_size = 27 #including the 0
+            dict_size = 34
             seq_len = 34
             batch_size =1
             test_seq = one_hot_encode(word_batch, dict_size, seq_len, batch_size)
@@ -111,8 +103,6 @@ def predict_fn(input_data, dictionary, model):
 #                     print(max_value_ind)
 #                     print(letter_numpy)
 
-
-
                     word_integer.append(max_value_ind)
                 
         else:
@@ -121,7 +111,5 @@ def predict_fn(input_data, dictionary, model):
             
         integer_sentence.append(word_integer)
 #         print('integer word: ', word_integer) 
-    print('Convert back sentences')
-    string_sentence = join_sentence(convert_back_data(int2letter, integer_sentence))
     
-    return integer_sentence, string_sentence
+    return integer_sentence

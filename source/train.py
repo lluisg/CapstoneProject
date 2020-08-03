@@ -160,7 +160,7 @@ if __name__ == '__main__':
 
 
     # Load the training data.
-    train_sample = pd.read_csv(os.path.join(args.data_dir, 'train.csv'), header=None, names=None, nrows=10000)
+    train_sample = pd.read_csv(os.path.join(args.data_dir, 'train.csv'), header=None, names=None)
     print('Loaded csv')
 
     train_sample_y = train_sample[train_sample.columns[0:34]]
@@ -173,7 +173,7 @@ if __name__ == '__main__':
     Y_np = train_sample_y.to_numpy(copy=True)
     print('To numpied')
 
-    dict_size = len(letter2int)+1 #including the 0
+    dict_size = 34
     seq_len = 34
     batch_size = len(train_sample_X)
     input_seq = one_hot_encode(X_np, dict_size, seq_len, batch_size)
