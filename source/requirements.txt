@@ -1,4 +1,0 @@
-pip
-pandas
-numpy
-beautifulsoup4
